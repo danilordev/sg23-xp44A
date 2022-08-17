@@ -2,6 +2,7 @@ const SOUND_URL = 'https://xp41-soundgarden-api.herokuapp.com/events';
 
 const formCadastroEvento = document.querySelector('#cadastro-evento');
 
+
 formCadastroEvento.addEventListener('submit', async (event) => {
     //evitar que a página seja recarregada
     event.preventDefault();
