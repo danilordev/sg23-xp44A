@@ -15,7 +15,7 @@ async function NovoObjeto (){
         const button = document.createElement('a');
 
         artigo.className = 'class = evento card p-5 m-3';
-        nomeData.innerText = (`${post.name} - ${post.scheduled}`);
+        nomeData.innerText = (`${post.name} - ${post.scheduled.substring(0,10).replaceAll('-','/')}`);
         atracoes.innerText = post.attractions;
         descricao.innerText = post.description;
         button.setAttribute = ("href","#");

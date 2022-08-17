@@ -1,19 +1,26 @@
+const btnEditar = document.querySelector('#btn-edit');
+
+
+
 const findID = () => {
-    const url = new URL (window.location.href);
+
+    const url = new URL(window.location.href);
     const id = url.searchParams.get('id');
 
     return id;
 }
 
 const exibirDetalhesEvento = async () => {
-    const dadosEvento = 
-    await fetch ('https://xp41-soundgarden-api.herokuapp.com/events' + findID(), {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            "Content-type": "application/json"
-        }
-    }).then((response) => response.json());
+    const dadosEvento =
+        await fetch('https://xp41-soundgarden-api.herokuapp.com/events/' + findID(), {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response) => response.json());
+
+    console.log(dadosEvento);
 
     const inputNome = document.getElementById("nome");
     const inputAtracoes = document.getElementById("atracoes");
@@ -23,11 +30,23 @@ const exibirDetalhesEvento = async () => {
     const inputBanner = document.getElementById("banner");
 
     inputNome.value = dadosEvento.name;
-    inputAtracoes.value = dadosEvento.attractions.join(', ');
+    inputAtracoes.value = dadosEvento.attractions;
     inputBanner.value = dadosEvento.poster;
     inputDescricao.value = dadosEvento.description;
-    inputData.value = dadosEvento.scheduled;
+    inputData.value = dadosEvento.scheduled.substring(0,10).replaceAll('-','/');
     inputLotacao.value = dadosEvento.number_tickets;
 }
+exibirDetalhesEvento(); 
 
-exibirDetalhesEvento();
+btnEditar.onclick = async (event) => {
+        event.preventDefault()
+
+        const mudaMetodo =  {
+         method: "PUT",
+         mode: "cors",
+         headers: {"Content-Type": "application/json"},
+        redirect: 'follow' 
+    }
+        const url = await fetch('https://xp41-soundgarden-api.herokuapp.com/events/' + findID(),mudaMetodo)
+}
+
