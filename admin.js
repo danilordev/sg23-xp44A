@@ -42,3 +42,12 @@ const listarEventos = async () => {
 }
 
 listarEventos();
+
+document.onload = () => {
+    const url = new URL(window.location.href);
+    const acao = url.searchParams.get('acao');
+
+    if(acao != null && acao == 'edit'){
+        alert('Evento atualizado com sucesso');
+    }
+}
