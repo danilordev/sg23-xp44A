@@ -20,15 +20,15 @@ const listarEventos = async () => {
 
     let htmlEventos = "";
 
-    eventos.forEach(evento => {
+    eventos.forEach((evento,index) => {
         htmlEventos += `
             <tr>
-                <th scope="row">#</th>
+                <th scope="row">${index+1}</th>
                 <td>${evento.scheduled.substring(0,10).replaceAll('-','/')}</td>
                 <td>${evento.name}</td>
                 <td>${evento.attractions.join(', ')}</td>
                 <td>
-                  <a href="reservas.html?id=${evento._id}" class="btn btn-dark">ver reservas</a>
+                  <a href="ver-reservas.html?id=${evento._id}" class="btn btn-dark">ver reservas</a>
                   <a href="editar-evento.html?id=${evento._id}" class="btn btn-secondary">editar</a>
                   <a href="excluir-evento.html?id=${evento._id}" class="btn btn-danger">excluir</a>
                 </td>

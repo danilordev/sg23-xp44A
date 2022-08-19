@@ -1,4 +1,5 @@
-const btnEditar = document.querySelector('#btn-edit');
+const form = document.querySelector("#formulario");
+const SOUND_URL = 'https://xp41-soundgarden-api.herokuapp.com/events';
 
 const findID = () => {
 
@@ -36,14 +37,20 @@ const exibirDetalhesEvento = async () => {
 }
 exibirDetalhesEvento(); 
 
-btnEditar.onclick = async (event) => {
-    event.preventDefault()
-
-    const mudaMetodo =  {
-     method: "DELETE",
-     mode: "cors",
-     headers: {"Content-Type": "application/json"},
-    redirect: 'follow' 
-}
-    const url = await fetch('https://xp41-soundgarden-api.herokuapp.com/events/'+ findID(),mudaMetodo)
-}
+const btnDelete = document.querySelector('#btnExcluir')
+btnDelete.addEventListener ('click', async (event) => {
+    event.preventDefault();
+   
+    const resposta = await fetch('https://xp41-soundgarden-api.herokuapp.com/events/' + findID(), {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((response) => {
+        return response;
+    }).then((responseOBJ) => {
+        //console.log(responseOBJ);
+        window.location.replace('admin.html?acao=edit');
+    });
+});
