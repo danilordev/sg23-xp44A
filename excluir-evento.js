@@ -53,4 +53,4 @@ btnDelete.addEventListener ('click', async (event) => {
         //console.log(responseOBJ);
         window.location.replace('admin.html?acao=edit');
     });
-});
+
